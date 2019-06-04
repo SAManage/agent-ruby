@@ -192,8 +192,9 @@ module ReportPortal
         failed = notification.examples.select { |example| example.execution_result.status == :failed }.count
         is_rerun = !ENV['RERUN'].nil?
         is_sequential = !ENV['SEQ'].nil?
-        should_report = failed == 0 || is_rerun || is_sequential
-        puts "[RP] Should Report? ==> #{should_report} | Failed = #{failed} | RERUN = #{is_rerun.to_s} | SEQ = #{is_sequential}"
+        browser = ENV['browser']
+        should_report = failed == 0 || is_rerun || is_sequential || browser == 'ie'
+        puts "[RP] Should Report? ==> #{should_report} | Failed = #{failed} | RERUN = #{is_rerun.to_s} | SEQ = #{is_sequential} | browser = #{browser}"
         should_report
       end
     end
